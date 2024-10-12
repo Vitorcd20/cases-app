@@ -21,7 +21,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const { toast } = useToast();
   const { id } = configuration;
   const { user } = useKindeBrowserClient();
-  const [isLoginModalOpen, setIsLoginModelOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const [showConfetti, setShowConfetti] = useState(false);
   useEffect(() => setShowConfetti(true), []);
@@ -61,7 +61,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
       createPaymentSession({ configId: id });
     } else {
       localStorage.setItem("configurationId", id);
-      setIsLoginModelOpen(true);
+      setIsLoginModalOpen(true);
     }
   };
 
@@ -77,10 +77,10 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         />
       </div>
 
-      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModelOpen} />
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
 
-      <div className="mt-20 flex flex-col items-center text-sm md:grid sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
-        <div className="md:col-span-4 lg:cols-span-3 md:row-span-2 md:row-end-2">
+      <div className="mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
+        <div className="md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2">
           <Phone
             className={cn(`bg-${tw}`, "max-w-[150px] md:max-w-full")}
             imgSrc={configuration.croppedImageUrl!}
@@ -88,11 +88,11 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         </div>
 
         <div className="mt-6 sm:col-span-9 md:row-end-1">
-          <h3 className="text-3xl font-bol tracking-tight text-gray-900">
-            Your {modelLabel} Case{" "}
+          <h3 className="text-3xl font-bold tracking-tight text-gray-900">
+            Your {modelLabel} Case
           </h3>
           <div className="mt-3 flex items-center gap-1.5 text-base">
-            <Check className="h-4 w-4 text-grenn-400" />
+            <Check className="h-4 w-4 text-green-500" />
             In stock and ready to ship
           </div>
         </div>
@@ -102,18 +102,17 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
             <div>
               <p className="font-medium text-zinc-950">Highlights</p>
               <ol className="mt-3 text-zinc-700 list-disc list-inside">
-                <li>Wireless charging comparable</li>
+                <li>Wireless charging compatible</li>
                 <li>TPU shock absorption</li>
-                <li>Packaging made from recicle materials</li>
+                <li>Packaging made from recycled materials</li>
                 <li>5 year print warranty</li>
               </ol>
             </div>
-
             <div>
               <p className="font-medium text-zinc-950">Materials</p>
               <ol className="mt-3 text-zinc-700 list-disc list-inside">
-                <li>High quality, durable material</li>
-                <li>Scratch and fingerptrint resistat coating</li>
+                <li>High-quality, durable material</li>
+                <li>Scratch- and fingerprint resistant coating</li>
               </ol>
             </div>
           </div>
@@ -122,7 +121,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
             <div className="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
               <div className="flow-root text-sm">
                 <div className="flex items-center justify-between py-1 mt-2">
-                  <p className="text-gray-600">Best price</p>
+                  <p className="text-gray-600">Base price</p>
                   <p className="font-medium text-gray-900">
                     {formatPrice(BASE_PRICE / 100)}
                   </p>
@@ -139,7 +138,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
                 {material === "polycarbonate" ? (
                   <div className="flex items-center justify-between py-1 mt-2">
-                    <p className="text-gray-600">Polycarbonate material</p>
+                    <p className="text-gray-600">Soft polycarbonate material</p>
                     <p className="font-medium text-gray-900">
                       {formatPrice(PRODUCT_PRICES.material.polycarbonate / 100)}
                     </p>
@@ -149,7 +148,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
                 <div className="my-2 h-px bg-gray-200" />
 
                 <div className="flex items-center justify-between py-2">
-                  <p className="font-semibold text-gray-900">Orde total</p>
+                  <p className="font-semibold text-gray-900">Order total</p>
                   <p className="font-semibold text-gray-900">
                     {formatPrice(totalPrice / 100)}
                   </p>
@@ -162,8 +161,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
                 onClick={() => handleCheckout()}
                 className="px-4 sm:px-6 lg:px-8"
               >
-                Checkout
-                <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                Check out <ArrowRight className="h-4 w-4 ml-1.5 inline" />
               </Button>
             </div>
           </div>
