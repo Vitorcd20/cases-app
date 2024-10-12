@@ -43,23 +43,23 @@ const DesignConfigurator = ({
   imageDimensions,
 }: DesignConfiguratorProps) => {
   const { toast } = useToast();
-  const router = useRouter()
+  const router = useRouter();
 
-  const {mutate: saveConfig} = useMutation({
+  const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (args: SaveConfigArgs) => {
-      await Promise.all([saveConfiguration(), _saveConfig(args)])
+      await Promise.all([saveConfiguration(), _saveConfig(args)]);
     },
     onError: () => {
       toast({
-        title: 'Something went wrong',
-        description: 'There was an error on our end. Please try again',
-        variant: 'destructive'
-      })
+        title: "Something went wrong",
+        description: "There was an error on our end. Please try again",
+        variant: "destructive",
+      });
     },
     onSuccess: () => {
-     router.push(`/configure/preview?id=${configId}`)
-    }
+      router.push(`/configure/preview?id=${configId}`);
+    },
   });
 
   const [options, setOptions] = useState<{
@@ -134,7 +134,8 @@ const DesignConfigurator = ({
     } catch (err) {
       toast({
         title: "Something went wrong",
-        description: "There was a problem to save your image. Please try again!",
+        description:
+          "There was a problem to save your image. Please try again!",
         variant: "destructive",
       });
     }
@@ -394,13 +395,18 @@ const DesignConfigurator = ({
               <Button
                 size="sm"
                 className="w-full"
-                onClick={() => saveConfig({
-                  configId,
-                  color: options.color.value,
-                  finish: options.finish.value,
-                  material: options.material.value,
-                  model: options.model.value
-                })}
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
+                onClick={() =>
+                  saveConfig({
+                    configId,
+                    color: options.color.value,
+                    finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.model.value,
+                  })
+                }
               >
                 Continue <ArrowRight className="h-4 w-4 ml-1.5 inline" />
               </Button>
